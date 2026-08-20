@@ -1,5 +1,6 @@
-package cl.empresa.demo;
 
+package cl.empresa.demo;
+//Clase que implementa operaciones basicas
 public class Calculadora {
 
     public int sumar(int a, int b) {
