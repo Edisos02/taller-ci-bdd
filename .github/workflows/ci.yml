@@ -25,11 +25,7 @@ jobs:
 
       - name: Publicar resultados JUnit
         if: always()
-        uses: dorny/test-reporter@v1
+        uses: mikepenz/action-junit-report@v4
         with:
-          name: JUnit y Cucumber
-          path: |
-            **/target/surefire-reports/*.xml
-            **/target/cucumber.xml
-          reporter: java-junit
-          fail-on-error: false
+          report_paths: '**/target/surefire-reports/TEST-*.xml'
+          check_name: 'Resultados JUnit y Cucumber'
