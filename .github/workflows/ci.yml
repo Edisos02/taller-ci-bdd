@@ -26,9 +26,20 @@ jobs:
       - name: Compilar y ejecutar pruebas
         run: mvn -B clean test
 
+      - name: Generar reporte HTML de Surefire
+        if: always()
+        run: mvn surefire-report:report
+
       - name: Publicar resultados JUnit
         if: always()
         uses: mikepenz/action-junit-report@v4
         with:
           report_paths: '**/target/surefire-reports/TEST-*.xml'
           check_name: 'Resultados JUnit y Cucumber'
+
+      - name: Publicar reporte HTML de Surefire como artefacto
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: surefire-html-report
+          path: target/site/surefire-report.html
