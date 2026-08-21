@@ -43,3 +43,10 @@ jobs:
         with:
           name: surefire-html-report
           path: target/site/surefire-report.html
+
+      - name: Publicar reporte HTML de Cucumber como artefacto
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cucumber-report
+          path: target/cucumber-report.html
