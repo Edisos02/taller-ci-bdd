@@ -7,7 +7,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  test:
+  build-and-test:
     runs-on: ubuntu-latest
     permissions:
       checks: write
@@ -23,8 +23,13 @@ jobs:
           java-version: '17'
           cache: maven
 
-      - name: Compilar y ejecutar pruebas
-        run: mvn -B clean test
+      # Stage 1: Build
+      - name: "Stage 1 - Build: compilar proyecto"
+        run: mvn -B clean compile
+
+      # Stage 2: Pruebas automatizadas (unitarias + integración + BDD)
+      - name: "Stage 2 - Test: ejecutar pruebas unitarias e integración"
+        run: mvn -B test
 
       - name: Generar reporte HTML de Surefire
         if: always()
